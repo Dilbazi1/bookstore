@@ -8,12 +8,12 @@ services:
     # Задание имени контейнера для сервиса django
     container_name: django
     # Задание команды, которую нужно запустить при запуске контейнера для сервиса django
-    command: python manage.py runserver 0.0.0.0:8080
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/app
     # Открытие порта на хостовой машине и перенаправление на порт в контейнере
     ports:
-      - 8080:8080
+      - 8000:8000
     # Зависимость от другого сервиса
     depends_on:
       - pgdb

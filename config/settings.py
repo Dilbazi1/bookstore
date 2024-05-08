@@ -13,11 +13,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 import django
-django.setup()
+
+# django.setup()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -29,7 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'pages',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +59,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,7 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -84,11 +85,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',   # Используется PostgreSQL
-        'NAME': 'postgres', # Имя базы данных
-        'USER': 'postgres', # Имя пользователя
-        'PASSWORD': 'postgres', # Пароль пользователя
-        'HOST': 'pgdb', # Наименование контейнера для базы данных в Docker Compose
+        'ENGINE': 'django.db.backends.postgresql',  # Используется PostgreSQL
+        'NAME': 'postgres',  # Имя базы данных
+        'USER': 'postgres',  # Имя пользователя
+        'PASSWORD': 'postgres',  # Пароль пользователя
+        'HOST': 'pgdb',  # Наименование контейнера для базы данных в Docker Compose
         'PORT': '5432',  # Порт базы данных
     }
 }
@@ -111,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -123,15 +123,26 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_URL = "/static/"
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-STATIC_URL = 'static/'
-STATIC_ROOT = '/home/dilbazi/mydjangoprojects/bookstore/static/'
-STATIC_URL = '/static/'
-# for django >= 3.1
-STATICFILES_DIRS =( os.path.join(BASE_DIR, 'static'),)
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+# Media files
+MEDIA_URL = "/media/"
+
+MEDIA_ROOT = BASE_DIR / "media"
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -141,4 +152,4 @@ STATICFILES_FINDERS = (
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL='accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.CustomUser'
